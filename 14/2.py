@@ -13,6 +13,5 @@ class Solution:
         return a
 
 
-
-a = Solution().longestCommonPrefix(["c","acc","ccc"])
+a = Solution().longestCommonPrefix(["c", "acc", "ccc"])
 print(a)
