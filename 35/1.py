@@ -1,10 +1,14 @@
 class Solution:
     def searchInsert(self, nums, target) -> int:
-        a = str(nums).find(str(target))
-        if a == -1:
-            a = 4
-        return a
+        ss = len(nums)
+        for i in range(ss):
+            if target == nums[i]:
+                return i
+            if target < nums[i]:
+                return i
+            if target > nums[-1]:
+                return ss
 
 
-a = Solution().searchInsert([1, 3, 5, 6], 4)
+a = Solution().searchInsert([1,3,4,5,10], 0)
 print(a)
