@@ -10,5 +10,5 @@ class Solution:
                 return ss
 
 
-a = Solution().searchInsert([1,3,4,5,10], 0)
+a = Solution().searchInsert([1, 3, 4, 5, 10], 0)
 print(a)
