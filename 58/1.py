@@ -14,5 +14,5 @@ class Solution:
         return l
 
 
-s = Solution().lengthOfLastWord(" a   b  ")
+s = Solution().lengthOfLastWord(" a   b ")
 print(s)
