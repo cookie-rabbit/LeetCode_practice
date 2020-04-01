@@ -5,9 +5,7 @@ class Solution:
             return 0
         c = ""
         for i in a:
-            if len(i) == 0:
-                pass
-            else:
+            if not len(i) == 0:
                 c = i
         l = len(c)
 
