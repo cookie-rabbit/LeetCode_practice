@@ -1,5 +1,5 @@
 # 翻转一棵二叉树。
-#
+# https://leetcode-cn.com/problems/invert-binary-tree/solution/226fan-zhuan-er-cha-shu-by-yi-wen-statistics/
 # 示例：
 #
 # 输入：
@@ -17,12 +17,8 @@
 #  / \   / \
 # 9   6 3   1
 
-# 定义二叉树
-class TreeNode(object):
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
+
+from 二叉树.tree_node import TreeNode
 
 
 class Solution:

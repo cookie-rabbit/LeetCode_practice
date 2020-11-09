@@ -6,10 +6,10 @@
 注意：给定 n 是一个正整数。
 """
 
-
-class Solution:
-    def mySqrt(self, n: int) -> int:
-
-
-s = Solution().mySqrt(4)
-print(s)
+#
+# class Solution:
+#     def mySqrt(self, n: int) -> int:
+#
+#
+# s = Solution().mySqrt(4)
+# print(s)
