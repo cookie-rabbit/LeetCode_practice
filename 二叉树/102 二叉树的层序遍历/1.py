@@ -49,7 +49,8 @@ class Solution_BFS(object):
         return res
 
 
-# DFS 方案
+# DFS 方案，该方法的核心在于记录进行到的层级，并和结果内已有的列表数目进行比较，
+# 当需要添加新列表时，已有列表数一定等于层级数。（注意层级是从0开始的）
 class Solution_DFS(object):
     # 始终记住传入的是树，树有 val，left，right，三个属性，不要当做列表。
     def levelOrder(self, root: TreeNode) -> List[List[int]]:
