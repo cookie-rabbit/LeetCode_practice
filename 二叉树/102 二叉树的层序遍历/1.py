@@ -60,9 +60,14 @@ class Solution_DFS(object):
     def level(self, root, level, res):
         if not root:
             return root
+        # 记录当前进行到的层级，如果第一次进行到该层级，则 level 一定会等于 len(res)，因为每一层
+        # 只会添加一个列表；而当第二次或更多次进行到该层级，则 len(res) 一定会大于 res，因为此时之前的同层级已经添加了本列表了，
+        # 所以此时不会再添加新的列表，而是填充到本层级所属的列表中。
         if len(res) == level:
             res.append([])
+        # 添加到指定层级的列表中
         res[level].append(root.val)
+        # 这里递归的诀窍就在于可以确认子树的下一级 level 一定是 +1 的，所以可以放心的这么写。
         if root.left:
             self.level(root.left, level + 1, res)
         if root.right:
