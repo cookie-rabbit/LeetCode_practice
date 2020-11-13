@@ -9,5 +9,5 @@ class Solution:
         return len(nums)
 
 
-s = Solution().removeDuplicates([1,1,2,2,3])
+s = Solution().removeDuplicates([1, 1, 2, 2, 3])
 print(s)
