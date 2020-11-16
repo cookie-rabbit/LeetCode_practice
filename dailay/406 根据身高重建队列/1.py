@@ -48,9 +48,12 @@ class Solution2:
         people.sort(key=lambda x: (-x[0], x[1]))
         ans = list()
         # 因为比 person 小的不会影响 person，因此它可以直接插入 k 值的位置。
+        # 直接插入 k 位置的原因：
+        # k 代表有 k 个人在 person 之前，所以只要插入到 k 位置，就是符合 k 的定义的，其他比他小的数字不需要关心。
+        # 因为是从大到小插入的，所以插入到位置 k 时，一定有 k 个数比 person 大
+        # （如果不够会自动向前补位，而所给条件是一定能排序成功的，所以不用担心 k 会被撑爆的问题）
         for person in people:
             # ans[person[1]:person[1]] = [person] 与 ans.insert(person[1], person) 相同
             # 如果插入的位置大于列表实际长度，则会插入到末尾位置
             ans[person[1]:person[1]] = [person]
         return ans
-
