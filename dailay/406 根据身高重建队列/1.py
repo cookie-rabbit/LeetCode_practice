@@ -27,7 +27,7 @@ class Solution:
             # 因为是按从小到大的顺序插入队列的，所以当 person 这个人插入队列中时，一定是第 k + 1 位置，
             # 前面一定有 k 个大于等于他的人。
             spaces = person[1] + 1
-            # 开始数位置
+            # 开始数位置，这些位置要留给大于他的人。
             for i in range(n):
                 # 因为是从小到大的顺序插入队列的，所以如果一个位置有值，则一定是小于 h 的数，spaces 不减少
                 # 不会等于因为按 k 的逆序排序，k 值最大的 person 一定最先排
@@ -44,14 +44,13 @@ class Solution:
 class Solution2:
     # 从大到小排列
     def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:
-        # 按从大到小的顺序排列，k 值越 小 的越早插入队伍
+        # 按从大到小的顺序排列，身高相同时 k 值越 小 的越早插入队伍
         people.sort(key=lambda x: (-x[0], x[1]))
-        # ans = list()
-        n = len(people)
-        ans = [[] for _ in range(n)]
+        ans = list()
         # 因为比 person 小的不会影响 person，因此它可以直接插入 k 值的位置。
         for person in people:
             # ans[person[1]:person[1]] = [person] 与 ans.insert(person[1], person) 相同
+            # 如果插入的位置大于列表实际长度，则会插入到末尾位置
             ans[person[1]:person[1]] = [person]
         return ans
 
