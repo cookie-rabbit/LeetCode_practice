@@ -54,6 +54,8 @@ class Solution2:
         # （如果不够会自动向前补位，而所给条件是一定能排序成功的，所以不用担心 k 会被撑爆的问题）
         for person in people:
             # ans[person[1]:person[1]] = [person] 与 ans.insert(person[1], person) 相同
+            # 但 ans[0:1] = [person] 和 ans.insert(0, person) 就不同了，因为此时会把 ans 的两个位置用 person 替换，如果
+            # person 数量小于 ans 要替换的位置则后面自动补上，超出则自动扩展。
             # 如果插入的位置大于列表实际长度，则会插入到末尾位置
             ans[person[1]:person[1]] = [person]
         return ans
