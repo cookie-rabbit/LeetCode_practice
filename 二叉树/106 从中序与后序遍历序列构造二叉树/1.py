@@ -24,17 +24,21 @@ class Solution:
     def buildTree(self, inorder: List[int], postorder: List[int]) -> TreeNode:
         # in_left 和 in_right 是两个索引，代表着新生成的二叉树的首位和末位在总中序遍历二叉树的上的索引。
         def helper(in_left, in_right):
-            # 如果这里没有节点构造二叉树了，就结束
+            # 如果这里没有节点构造二叉树了，就结束。
+            # 大于说明已经这个新二叉树首位位于末位后，即不存在了。
             if in_left > in_right:
                 return None
 
             # 选择 post_idx 位置的元素作为当前子树根节点
+            # 弹出后序遍历最后一位，他一定是当前二叉树的根节点
             val = postorder.pop()
             root = TreeNode(val)
 
             # 根据 root 所在位置分成左右两棵子树
+            # 那么根据中序遍历的特点，左子树和右子树一定位于中序遍历的根节点的左右两侧
             index = idx_map[val]
 
+            # 注意index是根节点在中序遍历中的索引，因此左右子树应该避开它
             # 构造右子树
             root.right = helper(index + 1, in_right)
             # 构造左子树
