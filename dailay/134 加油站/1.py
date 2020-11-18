@@ -42,4 +42,43 @@
 # 你无法返回 2 号加油站，因为返程需要消耗 4 升汽油，但是你的油箱只有 3 升汽油。
 # 因此，无论怎样，你都不可能绕环路行驶一周。
 
+from typing import List
 
+gas = [1, 2, 3, 4, 5]
+cost = [3, 4, 5, 1, 2]
+
+# 笨方法，把跑道展开成一条线，能跑到最后的就是符合条件的
+class Solution:
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        for i in range(len(gas)):
+            n = 0
+            new_gas = gas[i:] + gas[:i]
+            new_cost = cost[i:] + cost[:i]
+            for j in range(len(gas)):
+                n = n + new_gas[j] - new_cost[j]
+                if n < 0:
+                    break
+            else:
+                return i
+        return -1
+
+# 先排除油根本不够开的情况后，其他情况一定有解：
+# 假设从头开始开一遍，累计下来耗油最多的点的后面那个点开始出发，一定就是跑完以后剩下油最多的。
+# 即找出累计加油和累计油耗的差距最大的点，此时累计相对油耗最大，从这个点后面的那个点出发油一定够（已经排除了不够开的情况）。
+class Solution2:
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        left = [gas[i] - cost[i] for i in range(len(gas))]
+        minValue = 999
+        minIndex = 0
+
+        sumValue = 0
+        for j, l in enumerate(left):
+            sumValue += l
+            if sumValue < minValue:
+                minValue = sumValue
+                minIndex = j
+
+        if sumValue < 0:
+            return -1
+        else:
+            return (minIndex + 1) % len(gas)
