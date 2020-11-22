@@ -18,7 +18,6 @@
 from typing import List
 from 二叉树.tree_node import TreeNode
 
-
 # 递归
 class Solution:
     def buildTree(self, inorder: List[int], postorder: List[int]) -> TreeNode:
