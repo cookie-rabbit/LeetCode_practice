@@ -14,7 +14,7 @@ import collections
 
 from 二叉树.tree_node import TreeNode
 
-
+# 基本方法，一层层数过去
 class Solution:
     def connect(self, root: TreeNode) -> TreeNode:
         if not root:
