@@ -15,7 +15,7 @@ import collections
 from 二叉树.tree_node import TreeNode
 
 
-# 基本方法，一层层数过去，递归？
+# 基本方法，一层层数过去，递归？（这个方法同样适用非完美二叉树）
 class Solution:
     def connect(self, root: TreeNode) -> TreeNode:
         # 先处理异常
