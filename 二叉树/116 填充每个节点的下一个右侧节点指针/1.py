@@ -14,9 +14,11 @@ import collections
 
 from 二叉树.tree_node import TreeNode
 
-# 基本方法，一层层数过去
+
+# 基本方法，一层层数过去，递归？
 class Solution:
     def connect(self, root: TreeNode) -> TreeNode:
+        # 先处理异常
         if not root:
             return root
 
@@ -35,7 +37,7 @@ class Solution:
                 # 从队首取出元素
                 node = Q.popleft()
 
-                # 连接
+                # 连接，当 i 为最后一位数字的索引时，此时该数字已被取出并被前面的数字连接过了，Q 此时为空，不需要再连接了
                 if i < size - 1:
                     node.next = Q[0]
 
@@ -48,30 +50,33 @@ class Solution:
         # 返回根节点
         return root
 
-
+# 迭代？总之就是先处理本层，处理完后将指针挪动一位以继续
 class Solution2:
     def connect(self, root: TreeNode) -> TreeNode:
 
+        # 空内容处理
         if not root:
             return root
 
         # 从根节点开始
         leftmost = root
 
+        # 当该二叉树左边有值时（因为是完美二叉树，每个父节点一定有两个子节点）
         while leftmost.left:
 
             # 遍历这一层节点组织成的链表，为下一层的节点更新 next 指针
             head = leftmost
+            # 当 head 不存在，则说明本层已经被遍历完了
             while head:
 
-                # CONNECTION 1
+                # head.left 的链表下一位即是该叶节点相同父节点右边的子节点， head.right
                 head.left.next = head.right
 
-                # CONNECTION 2
+                # 如果本层还有其他元素，则本元素的右侧叶节点在链表的下一位即是本层下一个元素的左叶节点
                 if head.next:
                     head.right.next = head.next.left
 
-                # 指针向后移动
+                # 指针向后移动，遍历本层所有及诶单
                 head = head.next
 
             # 去下一层的最左的节点
