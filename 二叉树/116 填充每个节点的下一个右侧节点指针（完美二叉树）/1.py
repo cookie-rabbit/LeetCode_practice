@@ -50,6 +50,7 @@ class Solution:
         # 返回根节点
         return root
 
+
 # 迭代？总之就是先处理本层，处理完后将指针挪动一位以继续
 class Solution2:
     def connect(self, root: TreeNode) -> TreeNode:
@@ -76,7 +77,7 @@ class Solution2:
                 if head.next:
                     head.right.next = head.next.left
 
-                # 指针向后移动，遍历本层所有及诶单
+                # 指针向后移动，遍历本层所有节点
                 head = head.next
 
             # 去下一层的最左的节点
