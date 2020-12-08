@@ -63,9 +63,10 @@ class Solution2:
         leftmost = root
 
         # 当该二叉树左边有值时（因为是完美二叉树，每个父节点一定有两个子节点）
+        # 在叶节点的上一层遍历，叶节点不需要遍历，因为叶节点应该已经被其上一层遍历时添加过节点了
         while leftmost.left:
 
-            # 遍历这一层节点组织成的链表，为下一层的节点更新 next 指针
+            # 遍历这一层，为下一层的节点更新 next 指针
             head = leftmost
             # 当 head 不存在，则说明本层已经被遍历完了
             while head:
