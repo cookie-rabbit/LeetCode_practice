@@ -19,14 +19,22 @@ from 二叉树.tree_node import TreeNode
 
 class Solution:
     def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+        # 先排除异常情况
         if not root or root == p or root == q:
             return root
+
+        # 对左右节点分别进行递归
         left = self.lowestCommonAncestor(root.left, p, q)
         right = self.lowestCommonAncestor(root.right, p, q)
+        # 如果左右节点都找不到符合要求的，返回空
         if not left and not right:
             return None  # 1.
+        # 如果左边没找到，则一定在右边（注意这里的判断条件是递进的）
         if not left:
             return right  # 3.
+        # 同上，右边没找到，则一定在左边
         if not right:
             return left  # 4.
+
+        # 两边都找到，说明两边各有一个目标节点，则根节点符合目标。
         return root  # 2. if left and right:
