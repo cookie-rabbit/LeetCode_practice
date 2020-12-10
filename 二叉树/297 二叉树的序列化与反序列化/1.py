@@ -31,31 +31,25 @@ class Codec:
         :type root: TreeNode
         :rtype: str
         """
-        # 异常处理
         if not root:
             return "[]"
-
+        res = []
         queue = collections.deque()
         queue.append(root)
-        res = []
-        # 把二叉树的节点一个个弹出，加入列表中，
         while queue:
             node = queue.popleft()
+            # 把节点自身放入，并将子节点放入队列末尾
             if node:
-                res.append(str(node.val))
-                # 该节点的子节点排到队列最后
-                if node.left:
-                    queue.append(node.left)
-
-                if node.right:
-                    queue.append(node.right)
-
-            #  如果不存在则存入一个 'null'
+                queue.append(node.left)
+                queue.append(node.right)
+                res.append(node.val)
             else:
-                res.append("null")
-
-        # 注意拼成字符串返回
-        return '[' + ','.join(res) + ']'
+                # 否则放入一个空
+                res.append(None)
+        # 清理末尾的 None
+        while res[-1] == None:
+            res.pop()
+        return str(res)
 
     # 反序列化
     def deserialize(self, data):
@@ -68,24 +62,26 @@ class Codec:
         if data == '[]':
             return None
 
-        # vals 是列表 data 从第二位开始到倒数第二位结束的截取片段，这是为了去掉字符串两边的 '[', ']'
-        vals, i = data[1:-1].split(','), 1
-
-        # 列表第一个节点即为根节点
-        root = TreeNode(int(vals[0]))
+        # li 是列表 data 从第二位开始到倒数第二位结束的截取片段，这是为了去掉字符串两边的 '[', ']'
+        li = data[1:-1].split(',')
         queue = collections.deque()
+        # 列表第一个节点即为根节点
+        root = TreeNode(int(li[0]))
         queue.append(root)
-        while queue:
-            # 拿出队列中的第一个点
-            node = queue.popleft()
-            # 如 i 索引位的值不为 'null'，则先放左侧，再放右侧
-            # 否则直接跳过这一位
-            if vals[i] != "null":
-                node.left = TreeNode(int(vals[i]))
-                queue.append(node.left)
-            i += 1
-            if vals[i] != "null":
-                node.right = TreeNode(int(vals[i]))
-                queue.append(node.right)
-            i += 1
+        counter = 0
+        # 从根节点的下一位开始截取
+        for v in li[1:]:
+            # 状态记录器（像寄存器），异或用来记录当前状态
+            if counter == 0:
+                parent = queue.popleft()
+            if v.strip() != 'None':
+                cur = TreeNode(int(v))
+                queue.append(cur)
+                if counter == 0:
+                    parent.left = cur
+                else:
+                    parent.right = cur
+            # 当 counter 为0，异或得出结果为1，否则为0
+            # 这样用来判断是要放到左节点还是右节点
+            counter ^= 1
         return root
