@@ -36,6 +36,7 @@ from typing import List
 class Solution:
     def dfs(self, grid, r, c):
         grid[r][c] = 0
+        # 有 nr 列，每列 nc 个元素的矩形
         nr, nc = len(grid), len(grid[0])
         for x, y in [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]:
             if 0 <= x < nr and 0 <= y < nc and grid[x][y] == "1":
