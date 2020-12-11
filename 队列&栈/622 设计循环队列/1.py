@@ -60,8 +60,10 @@ class MyCircularQueue:
         """
         Insert an element into the circular queue. Return true if the operation is successful.
         """
+        # 如果队列塞满了就不让存了
         if self.count == self.capacity:
             return False
+        # 这里通过取余的方法巧妙地算出新插入值在队列中的位置
         self.queue[(self.headIndex + self.count) % self.capacity] = value
         self.count += 1
         return True
@@ -72,6 +74,7 @@ class MyCircularQueue:
         """
         if self.count == 0:
             return False
+        # 头部位置加1
         self.headIndex = (self.headIndex + 1) % self.capacity
         self.count -= 1
         return True
@@ -82,6 +85,7 @@ class MyCircularQueue:
         """
         if self.count == 0:
             return -1
+        # 用头部索引获取头部数字，这样即使有数字后来插入到前面也不会丢失正确的队列头部
         return self.queue[self.headIndex]
 
     def Rear(self) -> int:
@@ -91,6 +95,9 @@ class MyCircularQueue:
         # empty queue
         if self.count == 0:
             return -1
+        # 获取队列最后一位时，用 头部+总数-1 除以总长，得到最后一位的真正位置
+        # 这里 减一 是为了获取列表头部后剩余的索引位个数，即从当前头部索引位向后走几位是最后一位数，
+        # 同时，因为列表是循环的，所以用取余的方式获取最后一位的真实索引。
         return self.queue[(self.headIndex + self.count - 1) % self.capacity]
 
     def isEmpty(self) -> bool:
