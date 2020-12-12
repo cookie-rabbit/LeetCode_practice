@@ -47,7 +47,7 @@ class Codec:
                 # 否则放入一个空
                 res.append(None)
         # 清理末尾的 None
-        while res[-1] == None:
+        while res[-1] is None:
             res.pop()
         return str(res)
 
