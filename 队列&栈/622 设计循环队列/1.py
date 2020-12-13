@@ -74,7 +74,7 @@ class MyCircularQueue:
         """
         if self.count == 0:
             return False
-        # 头部位置加1
+        # 头部位置加1，记得总数减1
         self.headIndex = (self.headIndex + 1) % self.capacity
         self.count -= 1
         return True
