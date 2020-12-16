@@ -66,4 +66,4 @@ class Solution:
                     num_islands += 1
                     self.dfs(grid, r, c)
 
-            return num_islands
+        return num_islands

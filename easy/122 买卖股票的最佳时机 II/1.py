@@ -27,12 +27,20 @@
 from typing import List
 
 
+# 注意，一天内是可以先卖后买的
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
+        if not prices:
+            return 0
+
+        profit = 0
         s = len(prices)
-        for i in range(s):
-            if i <= s - 2:
-                if
+        i = 1
+        while i <= s - 1:
+            if prices[i] > prices[i - 1]:
+                profit += prices[i] - prices[i - 1]
+            i += 1
+        return profit
 
 
 a = Solution().maxProfit([7, 1, 5, 3, 6, 4])
