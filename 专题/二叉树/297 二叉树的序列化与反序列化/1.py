@@ -19,7 +19,7 @@
 # 说明:不要使用类的成员 / 全局 / 静态变量来存储状态，你的序列化和反序列化算法应该是无状态的。
 import collections
 
-from 二叉树.tree_node import TreeNode
+from tree_node import TreeNode
 
 
 class Codec:
