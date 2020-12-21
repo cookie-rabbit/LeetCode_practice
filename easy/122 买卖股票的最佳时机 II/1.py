@@ -28,6 +28,7 @@ from typing import List
 
 
 # 注意，一天内是可以先卖后买的
+# 所以其实最大的利润方式就是下一天比当天大就可以计算一笔利润
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         if not prices:
