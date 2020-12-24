@@ -38,9 +38,25 @@ class Solution2:
                 left += 1
             right += 1
 
-    #   或者更简单的
+        #   或者更简单的
         j = 0
         for i in range(len(nums)):
             if nums[i] != 0:
                 nums[j], nums[i] = nums[i], nums[j]
                 j += 1
+
+
+    # 比较第一个0的位置，当最后面n个数均为0时结束,效率不高
+    def moveZeroes2(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        if 0 not in nums:
+            return
+
+        counts = nums.count(0)
+
+        while len(set(nums[-counts:])) != 1 or list(set(nums[-counts:]))[0] != 0:
+            index = nums.index(0)
+            nums.pop(index)
+            nums.append(0)
