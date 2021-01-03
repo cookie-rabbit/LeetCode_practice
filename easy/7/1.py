@@ -17,6 +17,15 @@ class Solution:
             return 0
         return a
 
+    def reverse2(self, x: int) -> int:
+        if x == 0:
+            return x
+
+        mark = 1 if x > 0 else -1
+
+        a = abs(x)
+
+
 
 if __name__ == '__main__':
     b = Solution().reverse(-2023123123)
