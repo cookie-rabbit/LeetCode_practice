@@ -22,6 +22,7 @@
 # nums1.length == m + n
 # nums2.length == n
 # -109 <= nums1[i], nums2[i] <= 109
+import collections
 from typing import List
 
 
@@ -89,9 +90,22 @@ class Solution:
                     m += 1
                     break
 
-    # 双指针
+    # 双指针，利用了 m 和 n 作为双指针，比较得到两个数组最大的元素，作为最大值放在最后
     def merge3(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
         if m == 0:
             nums1[:] = nums2
+        elif n == 0:
+            pass
         else:
-            
+            while m != 0:
+                # 从两个列表的末位数进行比较，因为 nums1 中必然有足够的位数，所以可以这么做
+                if n > 0 and nums1[m - 1] < nums2[n - 1]:
+                    nums1[m + n - 1] = nums2[n - 1]
+                    n = n - 1
+                else:
+                    nums1[m + n - 1] = nums1[m - 1]
+                    m = m - 1
+
+            while n != 0:
+                nums1[m + n - 1] = nums2[n - 1]
+                n = n - 1
