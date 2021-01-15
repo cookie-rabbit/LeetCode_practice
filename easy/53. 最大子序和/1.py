@@ -25,6 +25,7 @@ class Solution:
             b = b if b > a else a
         return b
 
+    # 这个方法更好理解一点，将所有值之和的结果放入 nums 列表中，然后比较所有的和
     def maxSubArray2(self, nums: List[int]) -> int:
         for i in range(1, len(nums)):
             nums[i] = max(nums[i - 1] + nums[i], nums[i])
